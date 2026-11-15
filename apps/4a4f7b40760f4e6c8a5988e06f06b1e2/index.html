@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Генератор безопасных паролей</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1>Генератор безопасных паролей</h1>
+      <p class="app__subtitle">
+        Пароль создаётся локально в браузере и никуда не отправляется.
+      </p>
+    </header>
+
+    <section class="card" aria-labelledby="settings-heading">
+      <h2 id="settings-heading">Настройки</h2>
+
+      <div class="field">
+        <label for="length-range">Длина пароля</label>
+        <div class="length-row">
+          <input type="range" id="length-range" min="8" max="64" value="16" step="1" aria-describedby="length-hint">
+          <input type="number" id="length-number" min="8" max="64" value="16" step="1" inputmode="numeric" aria-label="Длина пароля числом">
+        </div>
+        <p id="length-hint" class="hint">От 8 до 64 символов.</p>
+      </div>
+
+      <fieldset class="field field--group">
+        <legend>Категории символов</legend>
+
+        <label class="check">
+          <input type="checkbox" id="use-upper" checked>
+          <span>Заглавные буквы <code>A–Z</code></span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="use-lower" checked>
+          <span>Строчные буквы <code>a–z</code></span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="use-digits" checked>
+          <span>Цифры <code>0–9</code></span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="use-symbols" checked>
+          <span>Спецсимволы <code>!@#$%^&amp;*()_+-=</code></span>
+        </label>
+      </fieldset>
+
+      <label class="check">
+        <input type="checkbox" id="exclude-similar">
+        <span>Исключить похожие символы <code>0 O 1 l I</code></span>
+      </label>
+
+      <div class="actions">
+        <button type="button" id="generate-btn" class="btn btn--primary">Сгенерировать</button>
+      </div>
+    </section>
+
+    <section class="card result-card" aria-labelledby="result-heading">
+      <h2 id="result-heading">Готовый пароль</h2>
+
+      <div class="result-row">
+        <output id="password-output" class="password-output" aria-live="polite"></output>
+        <button type="button" id="copy-btn" class="btn btn--copy" aria-label="Скопировать пароль">Скопировать</button>
+      </div>
+
+      <p id="entropy-info" class="hint" aria-live="polite"></p>
+      <p id="status-message" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card notes" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">Что важно знать</h2>
+      <ul>
+        <li>Пароль генерируется криптографически стойким способом, если браузер поддерживает <code>crypto.getRandomValues</code>. В старых браузерах используется запасной вариант.</li>
+        <li>Если включена хотя бы одна категория, в пароле гарантированно будет минимум один символ из каждой включённой категории.</li>
+        <li>Энтропия показана как приблизительная оценка. Она не учитывает компрометацию конкретного пароля и не заменяет менеджер паролей.</li>
+        <li>Копирование может быть недоступно в некоторых ограниченных iframe. В этом случае пароль можно выделить и скопировать вручную.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="./data.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+(function(root){'use strict';
+const units={ms:{name:'Миллисекунды',symbol:'мс'},s:{name:'Секунды',symbol:'с'},min:{name:'Минуты',symbol:'мин'},h:{name:'Часы',symbol:'ч'},day:{name:'Дни',symbol:'дн.'},week:{name:'Недели',symbol:'нед.'},month:{name:'Месяцы',symbol:'мес.'},year:{name:'Годы',symbol:'лет'}};
+const modes={average:365.2425,common:365,leap:366,commercial:360};
+function factors(mode){if(!Object.hasOwn(modes,mode))throw Error('Неизвестный способ расчёта.');const year=modes[mode]*86400;return {ms:.001,s:1,min:60,h:3600,day:86400,week:604800,month:year/12,year};}
+function parse(text){const str=String(text).trim().replace(/\u2212/g,'-').replace(',','.');if(!str)throw Error('Введите длительность.');if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(str))throw Error('Введите число, например 1,5 или 1000.');const v=Number(str);if(!Number.isFinite(v))throw Error('Число слишком большое.');return v;}
+function convert(value,from,to,mode='average'){const f=factors(mode);if(!Object.hasOwn(f,from)||!Object.hasOwn(f,to))throw Error('Неизвестная единица времени.');if(!Number.isFinite(value))throw Error('Введите конечное число.');const result=from===to?value:value*(f[from]/f[to]);if(!Number.isFinite(result))throw Error('Результат слишком велик. Уменьшите исходное число.');if(value!==0&&result===0)throw Error('Результат слишком мал для точного представления.');return Object.is(result,-0)?0:result;}
+const api={units,modes,factors,parse,convert};if(typeof module==='object'&&module.exports)module.exports=api;else root.TimeConverter=api;
+})(typeof globalThis!=='undefined'?globalThis:this);

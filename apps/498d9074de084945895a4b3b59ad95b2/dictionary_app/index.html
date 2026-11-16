@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Англо-русский словарь</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>Англо-русский словарь</h1>
+      <p class="subtitle">Офлайн-поиск по английским словам и русским переводам</p>
+    </header>
+    <section class="search-section" aria-label="Поиск по словарю">
+      <label for="search-input" class="visually-hidden">Введите слово для поиска</label>
+      <div class="search-row">
+        <input type="text" id="search-input" class="search-input" placeholder="Например: apple или яблоко" autocomplete="off" spellcheck="false">
+        <button type="button" id="clear-button" class="clear-button" aria-label="Очистить поле поиска">✕</button>
+      </div>
+      <p id="status-message" class="status-message" role="status" aria-live="polite">Введите слово, чтобы начать поиск.</p>
+    </section>
+    <section aria-label="Результаты поиска">
+      <ul id="results-list" class="results-list"></ul>
+    </section>
+    <footer class="app-footer">
+      <p>Словарь работает офлайн. Данные не отправляются.</p>
+    </footer>
+  </main>
+  <script src="./data.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>

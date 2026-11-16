@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Генератор кроссвордов</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <header class="app-header">
+    <h1>Генератор кроссвордов</h1>
+    <p class="subtitle">Небольшие кроссворды с проверкой ответов. Всё работает офлайн.</p>
+  </header>
+
+  <section class="controls" aria-label="Управление кроссвордом">
+    <div class="control-row">
+      <label for="size">Размер:</label>
+      <select id="size">
+        <option value="small">Маленький (9×9)</option>
+        <option value="medium" selected>Средний (11×11)</option>
+        <option value="large">Большой (13×13)</option>
+      </select>
+    </div>
+    <div class="control-row buttons">
+      <button type="button" id="btn-new" class="btn primary">Новый кроссворд</button>
+      <button type="button" id="btn-check" class="btn">Проверить</button>
+      <button type="button" id="btn-show" class="btn">Показать ответы</button>
+      <button type="button" id="btn-clear" class="btn">Очистить</button>
+    </div>
+  </section>
+
+  <div id="message" class="message" role="status" aria-live="polite"></div>
+
+  <p class="direction-hint">
+    Направление ввода: <strong id="dir-indicator">по горизонтали</strong>.
+    Нажмите <kbd>Пробел</kbd>, чтобы сменить направление. Стрелки перемещают курсор.
+  </p>
+
+  <div id="grid" class="grid" role="group" aria-label="Сетка кроссворда"></div>
+
+  <section class="clues" aria-label="Определения">
+    <div class="clue-col">
+      <h2>По горизонтали</h2>
+      <ol id="across-clues" class="clue-list"></ol>
+    </div>
+    <div class="clue-col">
+      <h2>По вертикали</h2>
+      <ol id="down-clues" class="clue-list"></ol>
+    </div>
+  </section>
+
+  <footer class="footnote">
+    <p>Словарь встроенный. Ответы проверяются локально в браузере; данные никуда не отправляются.</p>
+  </footer>
+</main>
+<script src="./data.js" defer></script>
+<script src="./app.js" defer></script>
+</body>
+</html>

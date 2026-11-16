@@ -1,0 +1,236 @@
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --border: #d1d5db;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --danger: #dc2626;
+  --focus: #fbbf24;
+  --cell-bg: #ffffff;
+  --cell-blank: #1f2933;
+  --cell-focus: #fef3c7;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.app-header h1 {
+  margin: 0 0 4px;
+  font-size: clamp(20px, 5vw, 28px);
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.controls {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.control-row + .control-row { margin-top: 8px; }
+
+.control-row label { font-weight: 500; }
+
+.control-row select {
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  min-width: 180px;
+}
+
+.btn {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.btn:hover { background: #f3f4f6; }
+
+.btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn.primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.message {
+  min-height: 1.5em;
+  margin: 8px 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.message:empty { padding: 0; margin: 0; }
+.message.info { background: #eff6ff; color: #1e40af; }
+.message.success { background: #ecfdf5; color: #065f46; }
+.message.error { background: #fef2f2; color: #991b1b; }
+
+.direction-hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 4px 0 12px;
+}
+
+.direction-hint kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  background: #f3f4f6;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+}
+
+.grid {
+  display: grid;
+  gap: 1px;
+  background: #9ca3af;
+  padding: 1px;
+  border: 1px solid #6b7280;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 16px;
+}
+
+.cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--cell-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cell.blank { background: var(--cell-blank); }
+
+.cell.letter .num {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  font-size: clamp(8px, 1.8vw, 11px);
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cell.letter input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font: inherit;
+  font-weight: 700;
+  font-size: clamp(14px, 3.2vw, 22px);
+  color: var(--text);
+  text-transform: uppercase;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.cell.letter input:focus {
+  background: var(--cell-focus);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.cell.letter input.wrong { color: var(--danger); background: #fee2e2; }
+.cell.letter input.wrong:focus { background: #fecaca; }
+.cell.letter input.correct { color: #065f46; }
+
+.clues {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .clues { grid-template-columns: 1fr 1fr; }
+}
+
+.clue-col h2 {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.clue-list {
+  margin: 0;
+  padding-left: 2.5em;
+  font-size: 14px;
+}
+
+.clue-list li {
+  margin-bottom: 4px;
+  padding-left: 2px;
+}
+
+.footnote {
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+@media print {
+  .controls, .direction-hint, .footnote, .message { display: none; }
+  .app { max-width: none; }
+  .grid { max-width: 100%; }
+}
